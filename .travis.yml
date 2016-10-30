@@ -15,9 +15,9 @@ python:
   - "2.7"
   - "3.5"
 install:
-- pip install --user $PIP_DEPS
-- pip install --user -r requirements.txt
-- python setup.py install --user --prefix=
+- pip install $PIP_DEPS
+- pip install -r requirements.txt
+- python setup.py install
 script:
 - flake8 --ignore N802,N806 `find . -name \*.py | grep -v setup.py | grep -v /doc/`
 - mkdir for_test
