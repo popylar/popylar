@@ -11,7 +11,8 @@ def get_uid():
         return False
 
 
-def track_event(tracking_id, category, action, uid=None, label=None, value=0):
+def track_event(tracking_id, category, action, uid=None, label=None, value=0,
+                software_version=None):
     """
     Record an event with Google Analytics
 
@@ -39,6 +40,8 @@ def track_event(tracking_id, category, action, uid=None, label=None, value=0):
     if not uid:
         return False
 
+    # Based on https://cloud.google.com/appengine/docs/python/google-analytics
+    # and:  https://developers.google.com/analytics/devguides/collection/protocol/v1/devguide  # noqa
     data = {'v': '1',  # API version.
             'tid': tracking_id,  # GA tracking ID
             'cid': uid,  # User unique ID, stored in `popylar_path`
@@ -46,7 +49,9 @@ def track_event(tracking_id, category, action, uid=None, label=None, value=0):
             'ec': category,  # Event category.
             'ea': action,  # Event action.
             'el': label,  # Event label.
-            'ev': value}  # Event value, must be an integer
+            'ev': value,  # Event value, must be an integer
+            # We hijack "app version" to report the package version:
+            'av': software_version}
     try:
         response = requests.post('http://www.google-analytics.com/collect',
                                  data=data)

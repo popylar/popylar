@@ -44,10 +44,3 @@ script:
 - py.test --pyargs popylar --cov-report term-missing --cov=popylar
 after_success:
 - coveralls
-before_cache:
-- conda clean --tarballs --packages --index-cache
-- rm -rf $HOME/miniconda/pkgs/cache
-- xargs rm <installed_files.txt
-cache:
-  directories:
-  - $HOME/miniconda
