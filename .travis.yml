@@ -14,11 +14,10 @@ env:
 python:
   - "2.7"
   - "3.5"
-before_install:
-- pip install -r requirements.txt
-- pip install $PIP_DEPS
 install:
-- python setup.py install
+- pip install --user $PIP_DEPS
+- pip install --user -r requirements.txt
+- python setup.py install --user --prefix=
 script:
 - flake8 --ignore N802,N806 `find . -name \*.py | grep -v setup.py | grep -v /doc/`
 - mkdir for_test
