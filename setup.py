@@ -11,7 +11,7 @@ popylar_path = op.join(op.expanduser('~'), '.popylar')
 uid = uuid.uuid1()
 
 fhandle = open(popylar_path, 'a')
-fhandle.write(uid)
+fhandle.write(uid.hex)
 fhandle.close()
 
 PACKAGES = find_packages()
