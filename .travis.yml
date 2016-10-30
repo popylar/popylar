@@ -1,0 +1,51 @@
+sudo: false
+deploy:
+  provider: pypi
+  user: arokem
+  password:
+    secure: jc1KhWiaAp45YG6MFsg7NkZQxNIsGp2CmnrbN3WTTDU0YCw46xlcXDJr/tBUM3VpV5DYgn3P3zo3fITDMPytPkziJrukmUiuqeu7CuYW0v+thPuRNAymHywk3kek79oDUjnWzVe6ZsOTuUh2hWedWrmtA1e6OPOARRgvgkm37De+W+d1BeWXdVvzAGpm70SARLtoPZPj2+jcUXutre1Zh5A3IiDyGGIy1fofQaXPd4S1K7saKy7r4z69n+VP+ggmC0PnYflsifjYY2r7vgveBF/whA5pkRWCiiq5xBPe/TA1XamLrPjTw9uQJ/UX4oE8VV4asM1zjw9O44SLC4DvvalhsqyQB7gHs3cNgdWu1+BEtTJcT3LLIcPWjHUWMReIhfrQvw1FhYVGN6eRhtNRrneMAtFl+dJN38i7cl1R84v5F1E8aobvixgb7mozmMZbjNXrzBQNoxy2SqFoSKh7vRTO4SlYW2rWsJnlT343Vk2UgIeOwHU3ZUckGHKKrUckSPXsSIt1BU2m7Nt73YmCsYytzfT75k9LDS3uVYdvImBN31m9kRxNEihYB126gI31GoCaA+qa3OjB6Zn5PorvddUGhz2Gl+R7fpLnHeD4PdIYknK+ZghyDs85NTOFSIB1pTwHqnAZaz9GGwGJOuzCreB7DyNWUS+lL0bwGKRvQB0=
+  on:
+    tags: true
+    repo: popylar/popylar
+env:
+  global:
+  - CONDA_DEPS="pip pytest" PIP_DEPS="requests coveralls pytest-cov"
+matrix:
+  include:
+  - os: linux
+    env:
+    - PYTHON_VERSION=2.7
+    - MINICONDA_URL="https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh"
+  - os: linux
+    env:
+    - PYTHON_VERSION=3.5
+    - MINICONDA_URL="https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh"
+before_install:
+- export MINICONDA=$HOME/miniconda
+- export PATH="$MINICONDA/bin:$PATH"
+- hash -r
+- echo $MINICONDA_URL
+- wget $MINICONDA_URL -O miniconda.sh;
+- bash miniconda.sh -b -f -p $MINICONDA;
+- conda config --set always_yes yes
+- conda update conda
+- conda info -a
+- conda config --add channels conda-forge
+- conda install python=$PYTHON_VERSION $CONDA_DEPS
+- travis_retry pip install $PIP_DEPS
+install:
+- python setup.py install --record installed_files.txt
+script:
+- flake8 --ignore N802,N806 `find . -name \*.py | grep -v setup.py | grep -v /doc/`
+- mkdir for_test
+- cd for_test
+- py.test --pyargs popylar --cov-report term-missing --cov=popylar
+after_success:
+- coveralls
+before_cache:
+- conda clean --tarballs --packages --index-cache
+- rm -rf $HOME/miniconda/pkgs/cache
+- xargs rm <installed_files.txt
+cache:
+  directories:
+  - $HOME/miniconda

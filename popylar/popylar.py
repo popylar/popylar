@@ -54,6 +54,6 @@ def track_event(tracking_id, category, action, uid=None, label=None, value=0):
         response = requests.post('http://www.google-analytics.com/collect',
                                  data=data)
 
-        return True
+        return response
     except:
         return False
