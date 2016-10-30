@@ -4,7 +4,7 @@ deploy:
   provider: pypi
   user: arokem
   password:
-    secure: jc1KhWiaAp45YG6MFsg7NkZQxNIsGp2CmnrbN3WTTDU0YCw46xlcXDJr/tBUM3VpV5DYgn3P3zo3fITDMPytPkziJrukmUiuqeu7CuYW0v+thPuRNAymHywk3kek79oDUjnWzVe6ZsOTuUh2hWedWrmtA1e6OPOARRgvgkm37De+W+d1BeWXdVvzAGpm70SARLtoPZPj2+jcUXutre1Zh5A3IiDyGGIy1fofQaXPd4S1K7saKy7r4z69n+VP+ggmC0PnYflsifjYY2r7vgveBF/whA5pkRWCiiq5xBPe/TA1XamLrPjTw9uQJ/UX4oE8VV4asM1zjw9O44SLC4DvvalhsqyQB7gHs3cNgdWu1+BEtTJcT3LLIcPWjHUWMReIhfrQvw1FhYVGN6eRhtNRrneMAtFl+dJN38i7cl1R84v5F1E8aobvixgb7mozmMZbjNXrzBQNoxy2SqFoSKh7vRTO4SlYW2rWsJnlT343Vk2UgIeOwHU3ZUckGHKKrUckSPXsSIt1BU2m7Nt73YmCsYytzfT75k9LDS3uVYdvImBN31m9kRxNEihYB126gI31GoCaA+qa3OjB6Zn5PorvddUGhz2Gl+R7fpLnHeD4PdIYknK+ZghyDs85NTOFSIB1pTwHqnAZaz9GGwGJOuzCreB7DyNWUS+lL0bwGKRvQB0=
+    secure: XQD43xb1JKz27fxxaNTuNCsZ/iBSXPPEJimiXkOAOW6Y/NMeGuojW4Yt05AoYznXBdNbNTEfh9NKHVaeGAUuLqsCxsC6JV+UKH19MGLZnSu1yTH1gqOHrYxqH2Ix7GwOA0fYP9JpYsmP0SdMg8wB9Ntk4lO69CjJoXtpTOCN2YkKdHGJbx/z+n+keSkffFBWd8KWLdbcX3Eu2eEH9KHJBrO6u0mHvWY1XDD0O4t0wTXM08EeKQfmvobI7NA2mSurBvkNVa3BCI7X2xyKg5xcLSkOLGodjTzmEBTsxnQ1RK5ffhtql/YX/3n0uCHTBq4BUKLrIsAd6YWH80/iwap/baoUR75kX6BU69BlynbcaUYQ/Wbkvh1OPJWwfdc+TRHNRJ80D8TlozMVkTvyCmRGHU2s/NYTnfcn4n4MDdrNre/Ibh10sSj1w6KdQZqI/22uaC4lgsAqjc8bUJS/zF8/wDFw/wlJ6ElO0Qg/wmPs/f3ngMJeib3+6H05p3uDCNx1dDYqtneutvZ+/JO4oEl4tGPwb3IFG1oatO100nT2nHXdqfq7G2RUghEWKOZr3ivYQnBx1CQpkgJSk9aVCg9Fz8lpbwrmA3k/Uz9rqWWhPKXJX65HQ8DCAUC/p3EzwrHk/P3SH3QCNASQ7ccj9SFCcBVkeoIV8xLvRbkCW6pf5qo=
   on:
     tags: true
     repo: popylar/popylar
@@ -12,8 +12,8 @@ env:
   global:
   - PIP_DEPS="coveralls pytest-cov flake8"
 python:
-  - "2.7"
-  - "3.5"
+- '2.7'
+- '3.5'
 install:
 - pip install $PIP_DEPS
 - pip install -r requirements.txt
