@@ -1,3 +1,4 @@
+language: python
 sudo: false
 deploy:
   provider: pypi
@@ -10,20 +11,14 @@ deploy:
 env:
   global:
   - PIP_DEPS="pytest coveralls pytest-cov flake8"
-matrix:
-  include:
-  - os: linux
-    env:
-    - PYTHON_VERSION=2.7
-  - os: linux
-    env:
-    - PYTHON_VERSION=3.5
-
+python:
+  - "2.7"
+  - "3.5"
 before_install:
 - pip install -r requirements.txt
 - pip install $PIP_DEPS
 install:
-- python setup.py install --record installed_files.txt
+- python setup.py install
 script:
 - flake8 --ignore N802,N806 `find . -name \*.py | grep -v setup.py | grep -v /doc/`
 - mkdir for_test
