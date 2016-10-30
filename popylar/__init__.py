@@ -1,1 +1,1 @@
-from .popylar import * #noqa
+from .popylar import *  # noqa
