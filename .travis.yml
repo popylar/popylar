@@ -1,0 +1,25 @@
+language: python
+sudo: false
+deploy:
+  provider: pypi
+  user: arokem
+  password:
+    secure: jc1KhWiaAp45YG6MFsg7NkZQxNIsGp2CmnrbN3WTTDU0YCw46xlcXDJr/tBUM3VpV5DYgn3P3zo3fITDMPytPkziJrukmUiuqeu7CuYW0v+thPuRNAymHywk3kek79oDUjnWzVe6ZsOTuUh2hWedWrmtA1e6OPOARRgvgkm37De+W+d1BeWXdVvzAGpm70SARLtoPZPj2+jcUXutre1Zh5A3IiDyGGIy1fofQaXPd4S1K7saKy7r4z69n+VP+ggmC0PnYflsifjYY2r7vgveBF/whA5pkRWCiiq5xBPe/TA1XamLrPjTw9uQJ/UX4oE8VV4asM1zjw9O44SLC4DvvalhsqyQB7gHs3cNgdWu1+BEtTJcT3LLIcPWjHUWMReIhfrQvw1FhYVGN6eRhtNRrneMAtFl+dJN38i7cl1R84v5F1E8aobvixgb7mozmMZbjNXrzBQNoxy2SqFoSKh7vRTO4SlYW2rWsJnlT343Vk2UgIeOwHU3ZUckGHKKrUckSPXsSIt1BU2m7Nt73YmCsYytzfT75k9LDS3uVYdvImBN31m9kRxNEihYB126gI31GoCaA+qa3OjB6Zn5PorvddUGhz2Gl+R7fpLnHeD4PdIYknK+ZghyDs85NTOFSIB1pTwHqnAZaz9GGwGJOuzCreB7DyNWUS+lL0bwGKRvQB0=
+  on:
+    tags: true
+    repo: popylar/popylar
+env:
+  global:
+  - PIP_DEPS="coveralls pytest-cov flake8"
+python:
+  - "2.7"
+  - "3.5"
+install:
+- pip install $PIP_DEPS
+- pip install -r requirements.txt
+- python setup.py install
+script:
+- flake8 --ignore N802,N806 `find . -name \*.py | grep -v setup.py | grep -v /doc/`
+- py.test --pyargs popylar --cov-report term-missing --cov=popylar
+after_success:
+- coveralls
