@@ -1,7 +1,7 @@
-import os
-import uuid
 from setuptools import setup, find_packages
-PACKAGES = find_packages()
+import os
+import os.path as op
+import uuid
 
 ver_file = os.path.join('popylar', 'version.py')
 with open(ver_file) as f:
@@ -13,6 +13,8 @@ uid = uuid.uuid1()
 fhandle = open(popylar_path, 'a')
 fhandle.write(uid)
 fhandle.close()
+
+PACKAGES = find_packages()
 
 opts = dict(name=NAME,
             maintainer=MAINTAINER,
