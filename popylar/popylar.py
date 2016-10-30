@@ -1,7 +1,4 @@
-import os
 import os.path as op
-import uuid
-
 import requests
 
 popylar_path = op.join(op.expanduser('~'), '.popylar')
@@ -55,5 +52,6 @@ def track_event(tracking_id, category, action, uid=None, label=None, value=0):
                                  data=data)
 
         return response
+
     except:
         return False
