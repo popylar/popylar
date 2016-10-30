@@ -9,7 +9,7 @@ deploy:
     repo: popylar/popylar
 env:
   global:
-  - CONDA_DEPS="pip pytest" PIP_DEPS="requests coveralls pytest-cov"
+  - CONDA_DEPS="pip pytest" PIP_DEPS="requests coveralls pytest-cov flake8"
 matrix:
   include:
   - os: linux
@@ -20,6 +20,7 @@ matrix:
     env:
     - PYTHON_VERSION=3.5
     - MINICONDA_URL="https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh"
+
 before_install:
 - export MINICONDA=$HOME/miniconda
 - export PATH="$MINICONDA/bin:$PATH"
