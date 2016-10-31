@@ -1,12 +1,34 @@
 import os.path as op
 import requests
+import uuid
 
 popylar_path = op.join(op.expanduser('~'), '.popylar')
+DO_NOT_TRACK = 'DO_NOT_TRACK'
 
 
-def get_uid():
+def opt_out():
+    """Permanently opt-out of Popylar tracking.
+
+    To opt-in again, run ``popylar.reset_uid()``
+    """
+    with open(popylar_path, 'w') as fhandle:
+        fhandle.write(DO_NOT_TRACK)
+
+
+def reset_uid():
+    """Opt-in to popylar tracking, and/or reset the user id"""
+    uid = uuid.uuid1()
+    with open(popular_path, 'w') as fhandle:
+        fhandle.write(uid.hex)
+
+
+def _get_uid():
     if op.exists(popylar_path):
         return open(popylar_path).read()
+        if uid.strip() == DO_NOT_TRACK:
+            return False
+        else:
+            return uid
     else:
         return False
 
@@ -33,10 +55,10 @@ def track_event(tracking_id, category, action, uid=None, label=None, value=0,
     """
     # If no user unique ID provided, try to get one from popylar_path:
     if uid is None:
-        uid = get_uid()
+        uid = _get_uid()
 
-    # If it's stil None, assume that the user has opted out (by removing that
-    # file):
+    # If it's stil None, assume that the user has opted out
+    # (either by removing the file or running popylar.opt_out())
     if not uid:
         return False
 
