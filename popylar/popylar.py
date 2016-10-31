@@ -22,9 +22,15 @@ def reset_uid():
         fhandle.write(uid.hex)
 
 
+def opt_in():
+    """Opt-in to popylar tracking"""
+    if not _get_uid():
+        reset_uid()
+
+
 def _get_uid():
     if op.exists(popylar_path):
-        return open(popylar_path).read()
+        uid = open(popylar_path).read()
         if uid.strip() == DO_NOT_TRACK:
             return False
         else:
