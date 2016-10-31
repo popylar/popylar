@@ -18,7 +18,7 @@ def opt_out():
 def reset_uid():
     """Opt-in to popylar tracking, and/or reset the user id"""
     uid = uuid.uuid1()
-    with open(popular_path, 'w') as fhandle:
+    with open(popylar_path, 'w') as fhandle:
         fhandle.write(uid.hex)
 
 
