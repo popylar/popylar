@@ -8,11 +8,14 @@ with open(ver_file) as f:
     exec(f.read())
 
 popylar_path = op.join(op.expanduser('~'), '.popylar')
-uid = uuid.uuid1()
 
-fhandle = open(popylar_path, 'a')
-fhandle.write(uid.hex)
-fhandle.close()
+# If UID file does not exist, then generate a UID and save to file.
+# We don't overwrite an existing one in order to keep UIDs constant
+# when the package is upgraded or installed in a venv.
+if not os.path.exists(popylar_path):
+    uid = uuid.uuid1()
+    with open(popylar_path, 'a') as fhandle:
+        fhandle.write(uid.hex)
 
 PACKAGES = find_packages()
 
