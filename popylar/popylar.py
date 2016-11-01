@@ -21,8 +21,8 @@ def opt_out():
 def reset_uid():
     """Opt-in to popylar tracking, and/or reset the user id"""
     parser = configparser.ConfigParser()
-    parser.read_dict(dict(uid=uuid.uuid1().hex,
-                          track=True))
+    parser.read_dict(dict(user=dict(uid=uuid.uuid1().hex,
+                                    track=True)))
     with open(popylar_path, 'w') as fhandle:
         parser.write(fhandle)
 

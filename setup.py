@@ -16,8 +16,8 @@ popylar_path = op.join(op.expanduser('~'), '.popylar')
 # when the package is upgraded or installed in a venv.
 if not os.path.exists(popylar_path):
     parser = configparser.ConfigParser()
-    parser.read_dict(dict(uid=uuid.uuid1().hex,
-                          track=True))
+    parser.read_dict(dict(user=dict(uid=uuid.uuid1().hex,
+                                    track=True)))
     with open(popylar_path, 'w') as fhandle:
         parser.write(fhandle)
 
