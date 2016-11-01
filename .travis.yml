@@ -10,7 +10,7 @@ deploy:
     repo: popylar/popylar
 env:
   global:
-  - PIP_DEPS="coveralls pytest-cov flake8"
+  - PIP_DEPS="coveralls pytest-cov flake8 doctr"
 
 python:
 - '2.7'
