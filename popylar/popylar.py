@@ -42,6 +42,7 @@ def _get_uid():
         uid = False
     return uid
 
+
 def track_event(tracking_id, category, action, uid=None, label=None, value=0,
                 software_version=None):
     """
