@@ -44,6 +44,7 @@ blogs, and popylar solves a real problem faced by many developers of the open
 source tools you probably depend on.
 
 ## What information is tracked?
+
 The tracked information is exactly that stored by Google Analytics when you visit
 a website, with the addition of [a few pieces of metadata](https://github.com/popylar/popylar/blob/master/popylar/popylar.py#L73-L82)
 that can be configured by the package.
