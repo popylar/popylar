@@ -7,7 +7,7 @@ popylar_path = op.join(op.expanduser('~'), '.popylar')
 
 
 def get_or_create_config():
-    if not os.path.exists(popylar_path):
+    if not op.exists(popylar_path):
         parser = configparser.ConfigParser()
         parser.read_dict(dict(user=dict(uid=uuid.uuid1().hex,
                                         track=True)))
