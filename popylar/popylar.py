@@ -6,13 +6,26 @@ import configparser
 popylar_path = op.join(op.expanduser('~'), '.popylar')
 
 
+def get_or_create_config():
+    if not os.path.exists(popylar_path):
+        parser = configparser.ConfigParser()
+        parser.read_dict(dict(user=dict(uid=uuid.uuid1().hex,
+                                        track=True)))
+        with open(popylar_path, 'w') as fhandle:
+            parser.write(fhandle)
+    else:
+        parser = configparser.ConfigParser()
+        parser.read(popylar_path)
+
+    return parser
+
+
 def opt_out():
     """Permanently opt-out of Popylar tracking.
 
     To opt-in again, run ``popylar.reset_uid()``
     """
-    parser = configparser.ConfigParser()
-    parser.read(popylar_path)
+    parser = get_or_create_config()
     parser['user']['track'] = False
     with open(popylar_path, 'w') as fhandle:
         parser.write(fhandle)
@@ -20,7 +33,7 @@ def opt_out():
 
 def reset_uid():
     """Opt-in to popylar tracking, and/or reset the user id"""
-    parser = configparser.ConfigParser()
+    parser = get_or_create_config()
     parser.read_dict(dict(user=dict(uid=uuid.uuid1().hex,
                                     track=True)))
     with open(popylar_path, 'w') as fhandle:
@@ -34,8 +47,7 @@ def opt_in():
 
 
 def _get_uid():
-    parser = configparser.ConfigParser()
-    parser.read(popylar_path)
+    parser = get_or_create_config()
     if parser['user'].getboolean('track'):
         uid = parser['user']['uid']
     else:
