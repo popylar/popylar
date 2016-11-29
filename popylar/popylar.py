@@ -1,9 +1,23 @@
 import os.path as op
 import requests
 import uuid
+import configparser
 
 popylar_path = op.join(op.expanduser('~'), '.popylar')
-DO_NOT_TRACK = 'DO_NOT_TRACK'
+
+
+def get_or_create_config():
+    if not op.exists(popylar_path):
+        parser = configparser.ConfigParser()
+        parser.read_dict(dict(user=dict(uid=uuid.uuid1().hex,
+                                        track=True)))
+        with open(popylar_path, 'w') as fhandle:
+            parser.write(fhandle)
+    else:
+        parser = configparser.ConfigParser()
+        parser.read(popylar_path)
+
+    return parser
 
 
 def opt_out():
@@ -11,15 +25,19 @@ def opt_out():
 
     To opt-in again, run ``popylar.reset_uid()``
     """
+    parser = get_or_create_config()
+    parser['user']['track'] = False
     with open(popylar_path, 'w') as fhandle:
-        fhandle.write(DO_NOT_TRACK)
+        parser.write(fhandle)
 
 
 def reset_uid():
     """Opt-in to popylar tracking, and/or reset the user id"""
-    uid = uuid.uuid1()
+    parser = get_or_create_config()
+    parser.read_dict(dict(user=dict(uid=uuid.uuid1().hex,
+                                    track=True)))
     with open(popylar_path, 'w') as fhandle:
-        fhandle.write(uid.hex)
+        parser.write(fhandle)
 
 
 def opt_in():
@@ -29,14 +47,12 @@ def opt_in():
 
 
 def _get_uid():
-    if op.exists(popylar_path):
-        uid = open(popylar_path).read()
-        if uid.strip() == DO_NOT_TRACK:
-            return False
-        else:
-            return uid
+    parser = get_or_create_config()
+    if parser['user'].getboolean('track'):
+        uid = parser['user']['uid']
     else:
-        return False
+        uid = False
+    return uid
 
 
 def track_event(tracking_id, category, action, uid=None, label=None, value=0,
@@ -64,7 +80,7 @@ def track_event(tracking_id, category, action, uid=None, label=None, value=0,
         uid = _get_uid()
 
     # If it's stil None, assume that the user has opted out
-    # (either by removing the file or running popylar.opt_out())
+    # (by running popylar.opt_out() or editing the config file)
     if not uid:
         return False
 
