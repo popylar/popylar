@@ -56,7 +56,7 @@ def _get_uid():
 
 
 def track_event(tracking_id, category, action, uid=None, label=None, value=0,
-                software_version=None):
+                software_version=None, timeout=2):
     """
     Record an event with Google Analytics
 
@@ -74,6 +74,12 @@ def track_event(tracking_id, category, action, uid=None, label=None, value=0,
         Event label.
     value : int
         Event value.
+    software_version : str
+        Records a version of the software.
+    timeout : float
+        Maximal duration (in seconds) for the network connection to track the
+        event. After this duration has elapsed with no response (e.g., on a
+        slow network connection), the tracking is dropped.
     """
     # If no user unique ID provided, try to get one from popylar_path:
     if uid is None:
@@ -98,7 +104,7 @@ def track_event(tracking_id, category, action, uid=None, label=None, value=0,
             'av': software_version}
     try:
         response = requests.post('http://www.google-analytics.com/collect',
-                                 data=data)
+                                 data=data, timeout=timeout)
 
         return response
 
