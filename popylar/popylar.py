@@ -1,22 +1,20 @@
 import os.path as op
 import requests
 import uuid
-import configparser
 import threading
-
+from configparser import ConfigParser
 
 popylar_path = op.join(op.expanduser('~'), '.popylar')
 
 
 def get_or_create_config():
     if not op.exists(popylar_path):
-        parser = configparser.ConfigParser()
-        parser.read_dict(dict(user=dict(uid=uuid.uuid1().hex,
-                                        track=True)))
+        default_dict = dict(user=dict(uid=uuid.uuid1().hex, track=True))
+        parser = ConfigParser(default_dict)
         with open(popylar_path, 'w') as fhandle:
             parser.write(fhandle)
     else:
-        parser = configparser.ConfigParser()
+        parser = ConfigParser()
         parser.read(popylar_path)
 
     return parser
