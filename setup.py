@@ -37,6 +37,7 @@ opts = dict(name=NAME,
             author_email=AUTHOR_EMAIL,
             platforms=PLATFORMS,
             version=VERSION,
+            install_requires=REQUIRES,
             requires=REQUIRES)
 
 
