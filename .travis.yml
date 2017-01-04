@@ -10,7 +10,9 @@ deploy:
     repo: popylar/popylar
 env:
   global:
-  - PIP_DEPS="coveralls pytest-cov flake8"
+  - PIP_DEPS="coveralls pytest-cov flake8 doctr"
+  - secure: "FNRIZW2v6gZupJshBsG/XlDoLszr/anGYLwWD2PMj/kecGfU9R4MnoE+p7cx4EQN+EItASd90cWu/dYpVLNQ13IjH09cYYzkOGSb4BhDo8I4aN3YmZ8l83aJfDuhrarAei5lvlqYoY5cXefEe1XAh6k2550MFCnB1ZSky4D+U9JMNZwmRUISylibKmBd0UNF6Ggma45a6t8UWlneL0PSXSddBo+O9IhDYYHrbjs45Gmk9/U8n90uZdK05ZZwceFPUzBZcC6GuZ0dL2vUmUx45i3LzQdWpoOTLtJx+qG3vP7POLuC6UVaFQLnbPkQCg8IbysSG2lpgIuP5iXXezAydU3HC2lu5dFHiQ0aBXkIN8r+6upRh+jz7x7MMviRKWdNxYeiEbs8EFc70WuoCQeRYkKgA+MZFrx5eAXwz5UANZh0fi+vUJrhisCUzKjxnf2A04oW3wu6t/0xiWFIIMVOF72n+QUohlN2uVIcC5zbMO82GZhkG+bDqDA7ZPTgi4Q2ICI9AFD3zTvmIKzazHdSfGbv5q5hyrPDz0LjLgHn9NgEnonZKUBchUr8HqPpW3LlV/sqk0Bm4r+udxTneGH2w4twXBbJFiSPMSB0H2/BIAEqAhWTMAcmhsu4xKdlW7KgIyzmXaX8OpPHCT32ADcWalldtc3duPA2Eq4Ac5/POM4="
+
 python:
 - '2.7'
 - '3.5'
@@ -21,5 +23,6 @@ install:
 script:
 - flake8 --ignore N802,N806 `find . -name \*.py | grep -v setup.py | grep -v version.py | grep -v __init__.py | grep -v /docs/`
 - py.test --pyargs popylar --cov-report term-missing --cov=popylar
+- doctr deploy --deploy-repo popylar/popylar.github.io
 after_success:
 - coveralls
