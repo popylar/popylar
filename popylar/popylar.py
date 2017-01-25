@@ -2,6 +2,8 @@ import os.path as op
 import requests
 import uuid
 import configparser
+import threading
+
 
 popylar_path = op.join(op.expanduser('~'), '.popylar')
 
@@ -55,8 +57,17 @@ def _get_uid():
     return uid
 
 
+def _do_it(data, timeout):
+    try:
+        response = requests.post('http://www.google-analytics.com/collect',
+                                 data=data, timeout=timeout)
+        return response
+    except:
+        return False
+
+
 def track_event(tracking_id, category, action, uid=None, label=None, value=0,
-                software_version=None, timeout=2):
+                software_version=None, timeout=2, thread=True):
     """
     Record an event with Google Analytics
 
@@ -102,11 +113,10 @@ def track_event(tracking_id, category, action, uid=None, label=None, value=0,
             'ev': value,  # Event value, must be an integer
             # We hijack "app version" to report the package version:
             'av': software_version}
-    try:
-        response = requests.post('http://www.google-analytics.com/collect',
-                                 data=data, timeout=timeout)
-
-        return response
-
-    except:
-        return False
+    if thread:
+        t = threading.Thread(target=_do_it, args=(data, timeout))
+        # No return value!
+        t.start()
+        return None
+    else:
+        return _do_it(data, timeout)
