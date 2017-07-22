@@ -13,7 +13,7 @@ env:
   - PIP_DEPS="coveralls pytest-cov flake8"
 python:
 - '2.7'
-- '3.5'
+- '3.6'
 install:
 - pip install $PIP_DEPS
 - pip install -r requirements.txt
