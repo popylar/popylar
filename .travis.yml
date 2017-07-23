@@ -11,15 +11,21 @@ deploy:
 env:
   global:
   - PIP_DEPS="coveralls pytest-cov flake8"
+
 python:
 - '2.7'
 - '3.6'
+
 install:
 - pip install $PIP_DEPS
 - pip install -r requirements.txt
 - python setup.py install
+
 script:
 - flake8 --ignore N802,N806 `find . -name \*.py | grep -v setup.py | grep -v version.py | grep -v __init__.py | grep -v /docs/`
+- mkdir for_test
+- cd for_test
 - py.test --pyargs popylar --cov-report term-missing --cov=popylar
+
 after_success:
 - coveralls
