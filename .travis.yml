@@ -17,8 +17,8 @@ python:
 - '3.6'
 
 install:
-- pip install $PIP_DEPS
-- pip install -r requirements.txt
+- travis_retry pip install $PIP_DEPS
+- travis_retry pip install -r requirements.txt
 - python setup.py install
 
 script:
