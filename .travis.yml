@@ -10,7 +10,7 @@ deploy:
     repo: popylar/popylar
 env:
   global:
-  - PIP_DEPS="coveralls pytest-cov flake8 doctr"
+  - PIP_DEPS="coveralls pytest-cov flake8"
 
 python:
 - '2.7'
@@ -27,3 +27,14 @@ script:
 
 after_success:
 - coveralls
+- |
+    if [[ $TRAVIS_PYTHON_VERSION == 3.6 ]]; then
+      pip install sphinx sphinx-gallery pillow
+      # Doctr for gh-pages;
+      set -e;
+      pip install doctr;
+      cd doc;
+      make html;
+      cd ..;
+      doctr deploy . --built-docs doc/_build/html --no-require-master;
+    fi
