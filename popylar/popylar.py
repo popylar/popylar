@@ -26,7 +26,7 @@ def opt_out():
     To opt-in again, run ``popylar.reset_uid()``
     """
     parser = get_or_create_config()
-    parser['user']['track'] = False
+    parser['user']['track'] = "False"
     with open(popylar_path, 'w') as fhandle:
         parser.write(fhandle)
 
