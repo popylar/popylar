@@ -9,16 +9,18 @@ open source projects being supported by private and public funding agencies, a
 means of more quantitative reporting would be beneficial.
 Current tracking options exist, but are relatively limited:
 
-- `PyPi
-<http://pypi.python.org>`_ tracks downloads, but cannot track when
+- `PyPi <http://pypi.python.org>`_ tracks downloads, but cannot track when
   packages are installed with downstream package managers like `conda <http://conda.pydata.org/docs/>`_, `brew <http://brew.sh>`_,
   `Aptitude <https://wiki.debian.org/Apt>`_, and others.
-- Software hosting services like `GitHub <http://github.com>` provide
+
+- Software hosting services like `GitHub <http://github.com>`_ provide
   information about project forks, but no information about number of downloads
   or clones.
+
 - Other means of tracking (mailing list traffic, bug report traffic,
   StackOverflow questions) are helpful but difficult to quantify and compare
   between projects.
+
 
 More fine-grained user tracking is accepted practice for blogs and other
 websites, and ``popylar`` seeks to add that capability to software packages.
