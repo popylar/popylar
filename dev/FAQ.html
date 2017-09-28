@@ -1,0 +1,164 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Frequently Asked Questions &#8212; Popylar 0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Popylar: Tracking software use with Google Analytics" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="frequently-asked-questions">
+<h1>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="why-this-package">
+<h2>Why this Package?<a class="headerlink" href="#why-this-package" title="Permalink to this headline">¶</a></h2>
+<p>Tracking the use of open software is, in general, very difficult, and with many
+open source projects being supported by private and public funding agencies, a
+means of more quantitative reporting would be beneficial.
+Current tracking options exist, but are relatively limited:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://pypi.python.org">PyPi</a> tracks downloads, but cannot track when
+packages are installed with downstream package managers like <a class="reference external" href="http://conda.pydata.org/docs/">conda</a>, <a class="reference external" href="http://brew.sh">brew</a>,
+<a class="reference external" href="https://wiki.debian.org/Apt">Aptitude</a>, and others.</li>
+<li>Software hosting services like <a class="reference external" href="http://github.com">GitHub</a> provide
+information about project forks, but no information about number of downloads
+or clones.</li>
+<li>Other means of tracking (mailing list traffic, bug report traffic,
+StackOverflow questions) are helpful but difficult to quantify and compare
+between projects.</li>
+</ul>
+<p>More fine-grained user tracking is accepted practice for blogs and other
+websites, and <code class="docutils literal"><span class="pre">popylar</span></code> seeks to add that capability to software packages.</p>
+</div>
+<div class="section" id="wait-is-this-really-ok">
+<h2>Wait… is this really OK?<a class="headerlink" href="#wait-is-this-really-ok" title="Permalink to this headline">¶</a></h2>
+<p>Short answer: we’re not sure. We agree that this feels a bit icky at first-blush,
+and we are open to feedback about the ethical issues or potential abuse of such
+a setup.
+That being said, the information tracked by popylar is identical to that tracked
+by any site using Google Analytics, including likely your favorite independent
+blogs, and popylar solves a real problem faced by many developers of the open
+source tools you probably depend on.</p>
+</div>
+<div class="section" id="what-information-is-tracked">
+<h2>What information is tracked?<a class="headerlink" href="#what-information-is-tracked" title="Permalink to this headline">¶</a></h2>
+<p>The tracked information is exactly that stored by Google Analytics when you
+visit a website, with the addition of a few pieces of metadata that can be
+configured by the package. In particular, the only identifying information
+provided by the Python package is a randomly-generated unique ID.</p>
+</div>
+<div class="section" id="can-a-user-opt-out">
+<h2>Can a user opt-out?<a class="headerlink" href="#can-a-user-opt-out" title="Permalink to this headline">¶</a></h2>
+<p>Yes. If a user runs <code class="docutils literal"><span class="pre">popylar.opt_out()</span></code>, popylar will never track usage for
+that system/user, and this opt-out state is preserved between sessions.</p>
+</div>
+<div class="section" id="can-i-still-use-packages-off-line">
+<h2>Can I still use packages off-line?<a class="headerlink" href="#can-i-still-use-packages-off-line" title="Permalink to this headline">¶</a></h2>
+<p>Yes. If no internet connection is detected, no information will be reported
+by popylar and the script will continue to execute as normal.</p>
+</div>
+<div class="section" id="where-can-i-give-feedback-or-offer-ideas">
+<h2>Where can I give feedback or offer ideas?<a class="headerlink" href="#where-can-i-give-feedback-or-offer-ideas" title="Permalink to this headline">¶</a></h2>
+<p>If you would like to weigh-in on this idea, please use
+Popylar’s [Github Issues](<a class="reference external" href="https://github.com/popylar/popylar/issues">https://github.com/popylar/popylar/issues</a>).
+We’d love to hear your thoughts, particularly on any ethical or technical
+issues we may be overlooking.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Frequently Asked Questions</a><ul>
+<li><a class="reference internal" href="#why-this-package">Why this Package?</a></li>
+<li><a class="reference internal" href="#wait-is-this-really-ok">Wait… is this really OK?</a></li>
+<li><a class="reference internal" href="#what-information-is-tracked">What information is tracked?</a></li>
+<li><a class="reference internal" href="#can-a-user-opt-out">Can a user opt-out?</a></li>
+<li><a class="reference internal" href="#can-i-still-use-packages-off-line">Can I still use packages off-line?</a></li>
+<li><a class="reference internal" href="#where-can-i-give-feedback-or-offer-ideas">Where can I give feedback or offer ideas?</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">Popylar: Tracking software use with Google Analytics</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/FAQ.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Ariel Rokem.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/FAQ.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
