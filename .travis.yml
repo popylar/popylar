@@ -38,5 +38,5 @@ after_success:
       cd doc;
       make html;
       cd ..;
-      doctr deploy --built-docs doc/_build/html --deploy-repo popylar-dev-docs
+      doctr deploy . --built-docs doc/_build/html --deploy-repo popylar-dev-docs
     fi
